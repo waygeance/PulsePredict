@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  color: #e5edf6;
+  color: #f8fafc;
   font-family:
-    "Avenir Next",
+    Inter,
+    Roboto,
     "Segoe UI",
-    "Trebuchet MS",
     sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,18 +17,18 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at 20% 0%, rgba(250, 204, 21, 0.08), transparent 28%),
-    radial-gradient(circle at 85% 10%, rgba(34, 197, 94, 0.08), transparent 24%),
-    linear-gradient(180deg, #071019 0%, #030712 100%);
+  overflow: hidden;
+  background: #0a0a0a;
 }
 
 button,
@@ -43,81 +43,225 @@ button {
 
 button:focus-visible,
 input:focus-visible,
-select:focus-visible {
-  outline: 2px solid rgba(250, 204, 21, 0.45);
+select:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid rgba(245, 158, 11, 0.55);
   outline-offset: 2px;
 }
 
-#root {
-  min-height: 100vh;
+.mono-data {
+  font-family:
+    "JetBrains Mono",
+    "Roboto Mono",
+    ui-monospace,
+    SFMono-Regular,
+    monospace;
+  font-variant-numeric: tabular-nums;
 }
 
-.panel-surface {
-  position: relative;
+.dashboard-panel {
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    linear-gradient(180deg, rgba(15, 23, 42, 0.88), rgba(2, 8, 23, 0.88));
+  border: 1px solid #1f1f1f;
+  background: #121418;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 24px 80px rgba(2, 6, 23, 0.45);
-  backdrop-filter: blur(18px);
+    inset 0 1px 0 rgba(255, 255, 255, 0.015),
+    0 14px 30px rgba(0, 0, 0, 0.18);
 }
 
-.panel-surface::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+.dashboard-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #303641 transparent;
+}
+
+.dashboard-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dashboard-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #303641;
+}
+
+.dashboard-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.rail-button,
+.icon-chip,
+.toggle-stack-button,
+.timeline-play-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #252932;
+  background: #14171c;
+  color: #d4d9e2;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    color 140ms ease,
+    transform 140ms ease;
+}
+
+.rail-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+}
+
+.rail-button:hover,
+.icon-chip:hover,
+.toggle-stack-button:hover,
+.timeline-play-button:hover {
+  border-color: #3a404a;
+  background: #1a1e24;
+}
+
+.rail-button-active,
+.toggle-stack-button-active {
+  border-color: #475569;
+  background: #1a2027;
+  color: #ffffff;
+}
+
+.icon-chip {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+}
+
+.toggle-stack-button {
+  min-width: 68px;
+  flex-direction: column;
+  gap: 2px;
+  border-radius: 16px;
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.timeline-play-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.map-surface {
   background:
-    linear-gradient(135deg, rgba(250, 204, 21, 0.05), transparent 28%),
-    linear-gradient(320deg, rgba(45, 212, 191, 0.04), transparent 34%);
+    radial-gradient(circle at 18% 20%, rgba(16, 185, 129, 0.08), transparent 26%),
+    radial-gradient(circle at 82% 78%, rgba(245, 158, 11, 0.07), transparent 24%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    #0c1014;
+  background-size:
+    auto,
+    auto,
+    64px 64px,
+    64px 64px,
+    auto;
 }
 
-.control-slider {
+.day-range,
+.timeline-range {
   -webkit-appearance: none;
   appearance: none;
-  height: 0.7rem;
+  width: 100%;
   border-radius: 999px;
-  background:
-    linear-gradient(90deg, rgba(45, 212, 191, 0.26), rgba(250, 204, 21, 0.42), rgba(249, 115, 22, 0.32));
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  background-color: #1a1d23;
+  background-repeat: no-repeat;
 }
 
-.control-slider::-webkit-slider-thumb {
+.day-range {
+  height: 4px;
+}
+
+.timeline-range {
+  height: 6px;
+  background-size: 100% 100%;
+}
+
+.day-range::-webkit-slider-thumb,
+.timeline-range::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 1.1rem;
-  height: 1.1rem;
   border-radius: 999px;
-  border: 2px solid rgba(15, 23, 42, 0.85);
-  background: #fde68a;
+  border: 2px solid #f3f4f6;
+  background: #f59e0b;
   box-shadow:
-    0 0 0 4px rgba(250, 204, 21, 0.14),
-    0 10px 24px rgba(15, 23, 42, 0.5);
+    0 0 0 4px rgba(245, 158, 11, 0.18),
+    0 8px 16px rgba(0, 0, 0, 0.28);
 }
 
-.control-slider::-moz-range-thumb {
-  width: 1.1rem;
-  height: 1.1rem;
+.day-range::-moz-range-thumb,
+.timeline-range::-moz-range-thumb {
   border-radius: 999px;
-  border: 2px solid rgba(15, 23, 42, 0.85);
-  background: #fde68a;
+  border: 2px solid #f3f4f6;
+  background: #f59e0b;
   box-shadow:
-    0 0 0 4px rgba(250, 204, 21, 0.14),
-    0 10px 24px rgba(15, 23, 42, 0.5);
+    0 0 0 4px rgba(245, 158, 11, 0.18),
+    0 8px 16px rgba(0, 0, 0, 0.28);
+}
+
+.day-range::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+}
+
+.timeline-range::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+}
+
+.day-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+}
+
+.timeline-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
 }
 
 .leaflet-container {
   background:
-    radial-gradient(circle at top, rgba(125, 211, 252, 0.18), transparent 35%),
-    #04101b;
+    radial-gradient(circle at 18% 20%, rgba(16, 185, 129, 0.08), transparent 26%),
+    radial-gradient(circle at 82% 78%, rgba(245, 158, 11, 0.07), transparent 24%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    #0c1014 !important;
+  background-size:
+    auto,
+    auto,
+    64px 64px,
+    64px 64px,
+    auto;
+}
+
+.leaflet-control-zoom {
+  border: 1px solid #252932 !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.26) !important;
+}
+
+.leaflet-top.leaflet-right .leaflet-control {
+  margin-top: 102px;
+  margin-right: 16px;
+}
+
+.leaflet-control-zoom a {
+  border-bottom-color: #252932 !important;
+  background: rgba(17, 20, 25, 0.96) !important;
+  color: #f8fafc !important;
+}
+
+.leaflet-control-zoom a:hover,
+.leaflet-control-zoom a:focus {
+  background: #1a1e24 !important;
 }
 
 .leaflet-control-attribution {
-  background: rgba(2, 6, 23, 0.72) !important;
-  color: #cbd5e1 !important;
-  border-radius: 0.75rem 0 0 0 !important;
+  background: rgba(17, 20, 25, 0.92) !important;
+  color: #9aa3b2 !important;
+  border-radius: 10px 0 0 0 !important;
 }
 
 .leaflet-control-attribution a {
@@ -125,22 +269,52 @@ select:focus-visible {
 }
 
 .leaflet-popup-content-wrapper {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  background: rgba(2, 6, 23, 0.96);
-  color: #e2e8f0;
-  box-shadow: 0 20px 55px rgba(2, 6, 23, 0.48);
+  border: 1px solid #252932;
+  border-radius: 16px;
+  background: rgba(15, 18, 22, 0.98);
+  color: #f8fafc;
+  box-shadow: 0 24px 42px rgba(0, 0, 0, 0.34);
 }
 
 .leaflet-popup-tip {
-  background: rgba(2, 6, 23, 0.96);
+  background: rgba(15, 18, 22, 0.98);
 }
 
 .leaflet-popup-content {
   margin: 0.75rem;
 }
 
-@media (max-width: 768px) {
+.leaflet-tooltip.incident-score-tooltip {
+  padding: 4px 8px;
+  border: 1px solid #262a31;
+  border-radius: 999px;
+  background: rgba(15, 18, 22, 0.96);
+  color: #ffffff;
+  font-family:
+    "JetBrains Mono",
+    "Roboto Mono",
+    ui-monospace,
+    monospace;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.leaflet-tooltip.incident-score-tooltip:before {
+  display: none;
+}
+
+.mobile-sheet-handle {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@media (max-width: 1023px) {
+  .leaflet-top.leaflet-right .leaflet-control {
+    margin-top: 16px;
+    margin-right: 16px;
+  }
+
   .leaflet-control-attribution {
     display: none;
   }
